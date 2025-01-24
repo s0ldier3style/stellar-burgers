@@ -13,6 +13,7 @@ import {
   TNewOrderResponse
 } from '../../utils/burger-api';
 import { fetchFeeds } from './feeds-slice';
+import { clearConstructor } from './constructor-slice';
 
 interface IOrderSliceState {
   success: boolean;
@@ -56,8 +57,7 @@ export const fetchOrderRequest = createAsyncThunk<TNewOrderResponse, string[]>(
   async (data: string[], thunkAPI) => {
     try {
       const response = await orderBurgerApi(data);
-
-      console.log(response);
+      thunkAPI.dispatch(clearConstructor());
       return response;
     } catch (error) {
       console.error('Ошибка при создании заказа:', error);
@@ -82,11 +82,19 @@ export const fetchOrdersProfile = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: 'order',
-  initialState,
+  initialState: {
+    ...initialState,
+    isOrderModalOpen: false
+  },
   reducers: {
     resetOrderModal: (state) => {
       state.order = null;
       state.success = false;
+      state.name = null;
+      state.isOrderModalOpen = false;
+    },
+    openOrderModal: (state) => {
+      state.isOrderModalOpen = true;
     }
   },
   extraReducers: (builder) => {
@@ -114,7 +122,7 @@ const orderSlice = createSlice({
         state.success = true;
         state.order = action.payload.order;
         state.name = action.payload.name;
-        console.log(`номер вашего заказа: ${state.order.number}`);
+        state.isOrderModalOpen = true;
       })
       .addCase(fetchOrderRequest.rejected, (state, action) => {
         state.isLoading = false;
@@ -149,4 +157,4 @@ export const orderSelect = createSelector(
 export const ordersProfile = (state: RootState): TOrder[] =>
   state.orderSlice.profileOrders ?? [];
 
-export const { resetOrderModal } = orderSlice.actions;
+export const { resetOrderModal, openOrderModal } = orderSlice.actions;

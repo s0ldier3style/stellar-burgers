@@ -4,23 +4,10 @@ import {
   createSelector,
   PayloadAction
 } from '@reduxjs/toolkit';
-import { getIngredientsApi } from '../../utils/burger-api';
-import { TIngredient } from '../../utils/types';
-import { RootState } from '../store';
-
-interface IngredientState {
-  items: Array<TIngredient>;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
-  selectedIngredient: TIngredient | null;
-}
-
-const initialState: IngredientState = {
-  items: [],
-  status: 'idle',
-  error: null,
-  selectedIngredient: null
-};
+import { getIngredientsApi } from '../../../utils/burger-api';
+import { TIngredient } from '../../../utils/types';
+import { RootState } from '../../store';
+import { initialState } from './constants';
 
 export const fetchAllIngredients = createAsyncThunk(
   'ingredients/fetchAll',

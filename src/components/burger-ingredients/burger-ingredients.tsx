@@ -5,7 +5,7 @@ import {
   selectedBuns,
   selectedMains,
   selectedSauces
-} from '../../services/slices/ingredient-slice';
+} from '../../services/slices/ingredient-slice/ingredient-slice';
 import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 

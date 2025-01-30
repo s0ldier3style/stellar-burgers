@@ -1,8 +1,8 @@
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { TLoginData } from '../../utils/burger-api';
-import { postLoginData } from '../../services/slices/user-slice';
-import { selectUser } from '../../services/slices/user-slice';
+import { postLoginData } from '../../services/slices/user-slice/user-slice';
+import { selectUser } from '../../services/slices/user-slice/user-slice';
 import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 

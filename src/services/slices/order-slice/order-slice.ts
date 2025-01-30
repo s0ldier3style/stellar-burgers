@@ -4,34 +4,15 @@ import {
   createSlice
 } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { RootState, useDispatch, useSelector } from '../store';
+import { RootState, useDispatch, useSelector } from '../../store';
 
 import {
   getOrderByNumberApi,
   getOrdersApi,
   orderBurgerApi,
   TNewOrderResponse
-} from '../../utils/burger-api';
-import { fetchFeeds } from './feeds-slice';
-import { clearConstructor } from './constructor-slice';
-
-interface IOrderSliceState {
-  success: boolean;
-  order: TOrder | null;
-  profileOrders: TOrder[] | null;
-  name: string | null;
-  isLoading: boolean;
-  error: string | null;
-}
-
-const initialState: IOrderSliceState = {
-  success: false,
-  order: null,
-  profileOrders: null,
-  name: null,
-  isLoading: false,
-  error: null
-};
+} from '../../../utils/burger-api';
+import { initialState } from './constants';
 
 export const fetchOrderDetails = createAsyncThunk(
   'order/fetchOrderDetails',
@@ -57,7 +38,8 @@ export const fetchOrderRequest = createAsyncThunk<TNewOrderResponse, string[]>(
   async (data: string[], thunkAPI) => {
     try {
       const response = await orderBurgerApi(data);
-      thunkAPI.dispatch(clearConstructor());
+
+      console.log(response);
       return response;
     } catch (error) {
       console.error('Ошибка при создании заказа:', error);
@@ -82,19 +64,11 @@ export const fetchOrdersProfile = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: 'order',
-  initialState: {
-    ...initialState,
-    isOrderModalOpen: false
-  },
+  initialState,
   reducers: {
     resetOrderModal: (state) => {
       state.order = null;
       state.success = false;
-      state.name = null;
-      state.isOrderModalOpen = false;
-    },
-    openOrderModal: (state) => {
-      state.isOrderModalOpen = true;
     }
   },
   extraReducers: (builder) => {
@@ -122,7 +96,7 @@ const orderSlice = createSlice({
         state.success = true;
         state.order = action.payload.order;
         state.name = action.payload.name;
-        state.isOrderModalOpen = true;
+        console.log(`номер вашего заказа: ${state.order.number}`);
       })
       .addCase(fetchOrderRequest.rejected, (state, action) => {
         state.isLoading = false;
@@ -157,4 +131,4 @@ export const orderSelect = createSelector(
 export const ordersProfile = (state: RootState): TOrder[] =>
   state.orderSlice.profileOrders ?? [];
 
-export const { resetOrderModal, openOrderModal } = orderSlice.actions;
+export const { resetOrderModal } = orderSlice.actions;

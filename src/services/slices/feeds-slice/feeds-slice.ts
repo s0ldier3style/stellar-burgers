@@ -4,27 +4,9 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit';
-import { getFeedsApi, TFeedsResponse } from '../../utils/burger-api';
-import { TOrder } from '@utils-types';
-import { RootState } from '../store';
-
-interface FeedsState {
-  success: boolean;
-  orders: TOrder[];
-  total: number;
-  totalToday: number;
-  isLoading: boolean;
-  error: string | null;
-}
-
-const initialState: FeedsState = {
-  success: false,
-  orders: [],
-  total: 0,
-  totalToday: 0,
-  isLoading: false,
-  error: null
-};
+import { getFeedsApi, TFeedsResponse } from '../../../utils/burger-api';
+import { RootState } from '../../store';
+import { initialState } from './constants';
 
 export const fetchFeeds = createAsyncThunk(
   'feeds/fetchFeeds',

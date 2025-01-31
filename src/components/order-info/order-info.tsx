@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   fetchAllIngredients,
   selectedAllIngredients
-} from '../../services/slices/ingredient-slice';
-import { orderSelect } from '../../services/slices/order-slice';
-import { fetchOrderDetails } from '../../services/slices/order-slice';
+} from '../../services/slices/ingredient-slice/ingredient-slice';
+import { orderSelect } from '../../services/slices/order-slice/order-slice';
+import { fetchOrderDetails } from '../../services/slices/order-slice/order-slice';
 import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {

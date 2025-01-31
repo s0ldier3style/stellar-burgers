@@ -12,25 +12,10 @@ import {
   TLoginData,
   TRegisterData,
   registerUserApi
-} from '../../utils/burger-api';
-import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
-import { RootState } from '../store';
-
-interface IUserState {
-  success: boolean;
-  isCheckAuth: boolean;
-  user: TUser | null;
-  isLoading: boolean;
-  error: string | null;
-}
-
-const initialState: IUserState = {
-  success: false,
-  isCheckAuth: false,
-  user: null,
-  isLoading: false,
-  error: null
-};
+} from '../../../utils/burger-api';
+import { deleteCookie, getCookie, setCookie } from '../../../utils/cookie';
+import { RootState } from '../../store';
+import { initialState } from './constants';
 
 export const registerUser = createAsyncThunk(
   'register/postUser',

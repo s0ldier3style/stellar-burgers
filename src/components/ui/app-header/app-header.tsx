@@ -75,6 +75,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
                   className={`text text_type_main-default ml-2 mr-10 ${
                     isActive ? styles.link_active_text : ''
                   }`}
+                  data-testid='userName'
                 >
                   {userName || 'Личный кабинет'}
                 </p>

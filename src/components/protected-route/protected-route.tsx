@@ -1,7 +1,7 @@
 import { RootState, useSelector } from '../../services/store';
 import { Navigate, useLocation } from 'react-router-dom';
-import { selectIsCheckAuth } from '../../services/slices/user-slice';
-import { selectUser } from '../../services/slices/user-slice';
+import { selectIsCheckAuth } from '../../services/slices/user-slice/user-slice';
+import { selectUser } from '../../services/slices/user-slice/user-slice';
 import { Preloader } from '@ui';
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;

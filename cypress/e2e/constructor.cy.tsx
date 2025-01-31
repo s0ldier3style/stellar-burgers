@@ -31,8 +31,6 @@ describe('Проверка функционала конструктора бу�
   describe('Добавление ингредиентов в конструктор', () => {
     it('отображает ингредиенты и позволяет добавлять их в конструктор', () => {
       cy.get(burgerConstructor).should('exist');
-      cy.get(burgerConstructor).should('not.contain', '[data-testid=bunTop]');
-      cy.get(burgerConstructor).should('not.contain', bunTop);
       cy.contains('Добавить').should('exist').click();
       cy.get(bunTop).should('exist');
       cy.get(bunTop).contains('Краторная булка N-200i (верх)');
@@ -55,6 +53,7 @@ describe('Проверка функционала конструктора бу�
       it('Открытие модального окна ингредиента', () => {
         cy.get(ingredientMain).first().click();
         cy.get(modal).should('be.visible');
+        cy.get(modal).contains('Биокотлета из марсианской Магнолии');
         cy.get(modalCloseButton).should('exist').click();
         cy.get(modal).should('not.exist');
         cy.get(ingredientMain).first().click();
@@ -94,10 +93,8 @@ describe('Проверка функционала конструктора бу�
         cy.get(orderNumber).should('contain', '12345');
         cy.get(modalCloseButton).should('exist').click();
         cy.get(modal).should('not.exist');
-        cy.get(burgerConstructor).should('not.contain', bunTop);
-        cy.get(burgerConstructor).should('not.contain', bunBottom);
-        cy.get(burgerConstructor).should('not.contain', ingredientMain);
-        cy.get(burgerConstructor).should('not.contain', ingredientSauce);
+        cy.get(bunTop).should('not.exist');
+        cy.get(bunBottom).should('not.exist');
       });
       afterEach(() => {
         cy.clearCookies();

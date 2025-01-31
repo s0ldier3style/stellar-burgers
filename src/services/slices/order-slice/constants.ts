@@ -8,6 +8,7 @@ interface IOrderSliceState {
   name: string | null;
   isLoading: boolean;
   error: string | null;
+  isOrderModalOpen: boolean;
 }
 export const initialState: IOrderSliceState = {
   success: false,
@@ -15,7 +16,8 @@ export const initialState: IOrderSliceState = {
   profileOrders: null,
   name: null,
   isLoading: false,
-  error: null
+  error: null,
+  isOrderModalOpen: false
 };
 export const mockedOrderDetails = {
   orders: [

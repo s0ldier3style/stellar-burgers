@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { RootState, useDispatch, useSelector } from '../../store';
-
+import { clearConstructor } from '../constructor-slice/constructor-slice';
 import {
   getOrderByNumberApi,
   getOrdersApi,
@@ -38,7 +38,7 @@ export const fetchOrderRequest = createAsyncThunk<TNewOrderResponse, string[]>(
   async (data: string[], thunkAPI) => {
     try {
       const response = await orderBurgerApi(data);
-
+      thunkAPI.dispatch(clearConstructor());
       console.log(response);
       return response;
     } catch (error) {
@@ -69,6 +69,11 @@ const orderSlice = createSlice({
     resetOrderModal: (state) => {
       state.order = null;
       state.success = false;
+      state.name = null;
+      state.isOrderModalOpen = false;
+    },
+    openOrderModal: (state) => {
+      state.isOrderModalOpen = true;
     }
   },
   extraReducers: (builder) => {
@@ -96,6 +101,7 @@ const orderSlice = createSlice({
         state.success = true;
         state.order = action.payload.order;
         state.name = action.payload.name;
+        state.isOrderModalOpen = true;
         console.log(`номер вашего заказа: ${state.order.number}`);
       })
       .addCase(fetchOrderRequest.rejected, (state, action) => {
@@ -131,4 +137,4 @@ export const orderSelect = createSelector(
 export const ordersProfile = (state: RootState): TOrder[] =>
   state.orderSlice.profileOrders ?? [];
 
-export const { resetOrderModal } = orderSlice.actions;
+export const { resetOrderModal, openOrderModal } = orderSlice.actions;

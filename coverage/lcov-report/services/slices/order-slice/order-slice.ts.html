@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.38% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>97/134</span>
+                <span class='fraction'>100/140</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.38% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>97/134</span>
+                <span class='fraction'>100/140</span>
             </div>
         
             
@@ -197,7 +197,13 @@
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -267,6 +273,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -291,6 +302,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -338,7 +350,7 @@
 } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 import { RootState, useDispatch, useSelector } from '../../store';
-&nbsp;
+import { clearConstructor } from '../constructor-slice/constructor-slice';
 import {
   getOrderByNumberApi,
   getOrdersApi,
@@ -371,7 +383,7 @@ export const fetchOrderRequest = createAsyncThunk&lt;TNewOrderResponse, string[]
   async (data: string[], thunkAPI) =&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const response = await orderBurgerApi(data);</span>
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      thunkAPI.dispatch(clearConstructor());</span>
 <span class="cstat-no" title="statement not covered" >      console.log(response);</span>
 <span class="cstat-no" title="statement not covered" >      return response;</span>
 <span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
@@ -402,6 +414,11 @@ const orderSlice = createSlice({
     resetOrderModal: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      state.order = null;</span>
 <span class="cstat-no" title="statement not covered" >      state.success = false;</span>
+<span class="cstat-no" title="statement not covered" >      state.name = null;</span>
+<span class="cstat-no" title="statement not covered" >      state.isOrderModalOpen = false;</span>
+    },
+    openOrderModal: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      state.isOrderModalOpen = true;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
   },
   extraReducers: (builder) =&gt; {
@@ -429,6 +446,7 @@ const orderSlice = createSlice({
         state.success = true;
         state.order = action.payload.order;
         state.name = action.payload.name;
+        state.isOrderModalOpen = true;
         console.log(`номер вашего заказа: ${state.order.number}`);
       })
       .addCase(fetchOrderRequest.rejected, (state, action) =&gt; {
@@ -464,7 +482,7 @@ export const orderSelect = createSelector(
 export const ordersProfile = <span class="fstat-no" title="function not covered" >(state: RootState): TOrder[] =&gt;</span>
 <span class="cstat-no" title="statement not covered" >  state.orderSlice.profileOrders ?? [];</span>
 &nbsp;
-export const { resetOrderModal } = orderSlice.actions;
+export const { resetOrderModal, openOrderModal } = orderSlice.actions;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -472,7 +490,7 @@ export const { resetOrderModal } = orderSlice.actions;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-30T19:34:16.856Z
+                at 2025-01-31T14:30:46.811Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import {
   fetchOrderRequest,
-  resetOrderModal
+  resetOrderModal,
+  openOrderModal
 } from '../../services/slices/order-slice/order-slice';
 import { selectUser } from '../../services/slices/user-slice/user-slice';
 
@@ -29,6 +30,9 @@ export const BurgerConstructor: FC = () => {
 
   const orderRequest = useSelector((state) => state.orderSlice.isLoading);
   const orderModalData = useSelector((state) => state.orderSlice.order);
+  const isOrderModalOpen = useSelector(
+    (state) => state.orderSlice.isOrderModalOpen
+  );
   const getIngredientsIds = () => {
     const bunId = constructorItems.bun ? constructorItems.bun._id : '';
     const ingredientsIds = constructorItems.ingredients.map(
@@ -65,7 +69,7 @@ export const BurgerConstructor: FC = () => {
       price={price}
       orderRequest={orderRequest}
       constructorItems={constructorItems}
-      orderModalData={orderModalData}
+      orderModalData={isOrderModalOpen ? orderModalData : null}
       onOrderClick={onOrderClick}
       closeOrderModal={closeOrderModal}
     />

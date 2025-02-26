@@ -2,7 +2,7 @@
 ![alt text](image.png)
 [Макет](<https://www.figma.com/file/vIywAvqfkOIRWGOkfOnReY/React-Fullstack_-Проектные-задачи-(3-месяца)_external_link?type=design&node-id=0-1&mode=design>)
 
-[Ссылка на деплой](https://daniltro.github.io/stellar-burgers/)
+[Ссылка на деплой](https://s0ldier3style.github.io/stellar-burgers/)
 
 ---
 

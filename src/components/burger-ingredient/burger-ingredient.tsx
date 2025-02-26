@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { BurgerIngredientUI } from '@ui';
 import { TBurgerIngredientProps } from './type';
 import { useDispatch } from '../../services/store';
-import { addIngredient } from '../../services/slices/constructor-slice';
+import { addIngredient } from '../../services/slices/constructor-slice/constructor-slice';
 import { TConstructorIngredient } from '@utils-types';
 import { nanoid } from 'nanoid';
 

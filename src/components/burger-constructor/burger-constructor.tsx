@@ -6,15 +6,15 @@ import {
   clearConstructor,
   selectBun,
   selectIngredients
-} from '../../services/slices/constructor-slice';
+} from '../../services/slices/constructor-slice/constructor-slice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import {
   fetchOrderRequest,
   resetOrderModal,
   openOrderModal
-} from '../../services/slices/order-slice';
-import { selectUser } from '../../services/slices/user-slice';
+} from '../../services/slices/order-slice/order-slice';
+import { selectUser } from '../../services/slices/user-slice/user-slice';
 
 export const BurgerConstructor: FC = () => {
   const bun = useSelector(selectBun);

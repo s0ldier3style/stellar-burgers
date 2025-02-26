@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from '../../services/store';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { RootState } from '../../services/store';
-import { selectedIngredient } from '../../services//slices/ingredient-slice';
-import { setSelectedIngredient } from '../../services/slices/ingredient-slice';
+import { selectedIngredient } from '../../services//slices/ingredient-slice/ingredient-slice';
+import { setSelectedIngredient } from '../../services/slices/ingredient-slice/ingredient-slice';
 import { TIngredient } from '@utils-types';
 
 export const IngredientDetails: FC = () => {

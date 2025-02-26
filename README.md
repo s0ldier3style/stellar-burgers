@@ -22,7 +22,7 @@
 
 ### Инструкция по запуску
 - Создайте папку для проекта и перейдите в неё.
-- Склонируйте репозиторий `git clone git@github.com:daniltro/stellar-burgers.git`
+- Склонируйте репозиторий `git clone https://github.com/s0ldier3style/stellar-burgers.git`
 - Установите зависимости `npm install`
 Запускайте проект `npm start`
 ---
